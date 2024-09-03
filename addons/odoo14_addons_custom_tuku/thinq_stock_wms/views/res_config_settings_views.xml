@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="thinq_inherit1_res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">thinq.inherit1.res.config.settings.view.form.inherit.stock</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='warning_info']" position="after" >
+                    <div class="col-12 col-lg-6 o_setting_box" id="product_expiration_reminder">
+                        <div class="o_setting_left_pane">
+                            <field name="group_send_expiration_reminder"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_send_expiration_reminder" string="Warnings"/>
+                            <div class="text-muted">
+                                Automatically remind the product expiration date to person in charge.
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//div[@id='signature_delivery_orders']//div[hasclass('text-muted')]" position="replace">
+                    <div class="text-muted">
+                        Require a signature on your transfer (DO, GR, Int.Transfer, etc)
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

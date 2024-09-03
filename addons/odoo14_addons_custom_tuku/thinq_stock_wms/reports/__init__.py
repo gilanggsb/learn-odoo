@@ -1,0 +1,1 @@
+from . import report_daily_inventory

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <record id="url_img_storage" model="ir.config_parameter">
+            <field name="key">url_img_storage</field>
+            <field name="value">https://cas-wms-odoo-dev-local.tech-lab.space/</field>
+        </record>
+    
+    </data>
+</odoo>

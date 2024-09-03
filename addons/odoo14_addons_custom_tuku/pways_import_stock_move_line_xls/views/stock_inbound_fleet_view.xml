@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inbound_fleet_form_import" model="ir.ui.view">
+        <field name="name">thinq.stock.inbound.fleet.form.view.inherit.stock</field>
+        <field name="model">thinq.stock.inbound.fleet</field>
+        <field name="inherit_id" ref="thinq_stock_inbound_fleet_wms.view_thinq_stock_inbound_fleet"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/header/button[last()]" position="after">
+                <button name="action_inbound_fleet_import" string="Import" class="btn btn-primary" type="object"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

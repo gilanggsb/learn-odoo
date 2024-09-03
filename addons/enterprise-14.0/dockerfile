@@ -1,0 +1,17 @@
+FROM odoo:14.0
+
+# Install dependencies if needed
+# RUN apt-get update && apt-get install -y <your-dependencies>
+
+# Copy custom addons to the Odoo addons directory
+COPY ./addons /mnt/extra-addons
+
+# Optionally copy your configuration file
+COPY ./odoo.conf /etc/odoo/odoo.conf
+
+# Ensure that the Odoo user owns the mounted files
+RUN chown -R odoo: /mnt/extra-addons /etc/odoo/odoo.conf
+
+USER odoo
+
+CMD ["odoo"]

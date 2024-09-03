@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- © 2021 Thinq Technology -->
+        <record id="thinq_inherit1_stock_quant_package_form_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.stock.quant.package.form.view</field>
+            <field name="model">stock.quant.package</field>
+            <field name="inherit_id" ref = "stock.view_quant_package_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="warehouse_owner_id" />
+                    <field name="warehouse_id" />
+                    <field name="available" />
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_inherit1_stock_quant_package_tree_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.stock.quant.package.tree.view</field>
+            <field name="model">stock.quant.package</field>
+            <field name="inherit_id" ref = "stock.view_quant_package_tree"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="warehouse_owner_id" />
+                    <field name="warehouse_id" />
+                    <field name="available" />
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_inherit1_product_packaging_form_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.product.packaging.form.view</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref = "product.product_packaging_form_view"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="warehouse_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_inherit1_product_packaging_tree_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.product.packaging.tree.view</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref = "product.product_packaging_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="before">
+                    <field name="warehouse_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_product_packaging_search_view" model="ir.ui.view">
+            <field name="name">thinq.product.packaging.search.view</field>
+            <field name="model">product.packaging</field>
+            <field name="arch" type="xml">
+                <search string="Product Packaging">
+                    <field name="name" string="Product Packaging"/>
+                    <field name="product_id"/>
+                    <field name="warehouse_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Product" name="groupby_product" domain="[]" context="{'group_by': 'product_id'}"/>
+                        <filter string="Warehouse" name="groupby_warehouse" domain="[]" context="{'group_by': 'warehouse_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="product.action_packaging_view">
+            <field name="search_view_id" ref="thinq_product_packaging_search_view"/>
+            <field name="view_id" ref="product.product_packaging_tree_view"/>
+        </record>
+
+    </data>
+</odoo>

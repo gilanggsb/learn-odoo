@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <!-- Top menu item -->
+        <menuitem 
+            id="menu_wms_root"
+            name="WMS"
+            web_icon="warehouse_management_system,static/description/icon.png"
+            sequence="25"/>
+
+            <!-- Group Menu Sequence 0 Start -->
+            <menuitem
+                id="stock_picking_type_menu_inherit_order"
+                name="Overview"
+                action="stock.stock_picking_type_action"
+                parent="menu_wms_root" 
+                sequence="0"/>
+            <!-- Group Menu Sequence 0 End -->
+
+            <!-- Group Menu Sequence 1 Start -->
+            <menuitem 
+                id="menu_orders_management" 
+                name="Orders"
+                parent="menu_wms_root" 
+                sequence="1"/>
+                <!-- List Menu Sequence 1 -->
+                <menuitem 
+                    id="menu_inbound_order_action"
+                    name="Inbound Order" 
+                    action="inbound_order_action"  
+                    parent="menu_orders_management" 
+                    sequence="1"/>
+                <menuitem 
+                    id="menu_outbound_order_action"
+                    name="Outbound Order" 
+                    action="outbound_order_action"  
+                    parent="menu_orders_management" 
+                    sequence="2"/>
+            <!-- Group Menu Sequence 1 End -->
+
+            <!-- Group Menu Sequence 2 Start -->
+            <menuitem 
+                id="menu_operation_management" 
+                name="Operation"
+                parent="menu_wms_root" 
+                sequence="2"/>
+                <!-- List Menu Sequence 2 -->
+                <menuitem 
+                    id="menu_inventory_management"
+                    name = "Inventory"  
+                    parent="menu_operation_management" 
+                    sequence="1"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_transfer_action" 
+                        name="Transfers"
+                        action="stock.action_picking_tree_all"
+                        parent="menu_inventory_management"
+                        sequence="1"/>
+                    <menuitem 
+                        id="menu_replenishment_action" 
+                        name="Replenishment"
+                        action="stock.action_orderpoint_replenish"
+                        parent="menu_inventory_management"
+                        sequence="2"/>
+                    <menuitem 
+                        id="menu_stock_cycle_count" 
+                        name="Cycle Counts"
+                        action="stock_cycle_count.action_stock_cycle_count"
+                        parent="menu_inventory_management"
+                        sequence="3"/> 
+                    <menuitem 
+                        id="menu_inventory_adjustment_action" 
+                        name="Inventory Adjustment"
+                        action="stock.action_inventory_form"
+                        parent="menu_inventory_management"
+                        sequence="4"/>
+                <menuitem 
+                    id="menu_manufacture_management"
+                    name = "Manufacture"  
+                    parent="menu_operation_management" 
+                    sequence="2"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_manufacturing_orders_action" 
+                        name="Manufacturing Orders"
+                        action="mrp.mrp_production_action"
+                        parent="menu_manufacture_management"
+                        sequence="1"/>
+                    <menuitem 
+                        id="menu_production_orders_batch_action" 
+                        name="Production Orders Batch"
+                        action="production_order_batch_action"
+                        parent="menu_manufacture_management"
+                        sequence="2"/>
+                    <menuitem 
+                        id="menu_unbuild_orders_action" 
+                        name="Unbuild Orders"
+                        action="mrp.mrp_unbuild"
+                        parent="menu_manufacture_management"
+                        sequence="3"/>
+                    <menuitem 
+                        id="menu_scrap_action" 
+                        name="Scrap"
+                        action="stock.action_stock_scrap"
+                        parent="menu_manufacture_management"
+                        sequence="4"/>
+                <menuitem 
+                    id="menu_planning_action"
+                    name = "Planning"  
+                    parent="menu_operation_management" 
+                    sequence="3"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_run_scheduler_action" 
+                        name="Run Scheduler"
+                        action="stock.action_procurement_compute"
+                        parent="menu_planning_action"
+                        sequence="1"/>
+            <!-- Group Menu Sequence 2 End -->
+            
+            <!-- Group Menu Sequence 3 Start -->
+            <menuitem 
+                id="menu_product_management" 
+                name="Products"
+                parent="menu_wms_root" 
+                sequence="3"/>
+                <!-- List Menu Sequence 3 -->
+                <menuitem 
+                    id="menu_product_action"
+                    name = "Products" 
+                    action="product.product_template_action_all"  
+                    parent="menu_product_management" 
+                    sequence="1"/>
+                <menuitem 
+                    id="menu_bom_action"
+                    name = "Bills of Materials" 
+                    action="mrp.mrp_bom_form_action"  
+                    parent="menu_product_management" 
+                    sequence="2"/>
+                <menuitem 
+                    id="menu_lot_number_action"
+                    name = "Lots/Serial Number" 
+                    action="stock.action_production_lot_form"  
+                    parent="menu_product_management" 
+                    sequence="3"/>
+                <menuitem 
+                    id="menu_package_inherit"
+                    name = "Packages" 
+                    action="stock.action_package_view"  
+                    parent="menu_product_management" 
+                    sequence="4"/>
+            <!-- Group Menu Sequence 3 End -->
+
+            <!-- Group Menu Sequence 4 Start -->
+            <menuitem 
+                id="menu_partner_management" 
+                name="Partners"
+                parent="menu_wms_root" 
+                sequence="4"/>
+                <!-- List Menu Sequence 4 -->
+                <menuitem 
+                    id="menu_customer_action"
+                    name = "Customers" 
+                    action="account.res_partner_action_customer"
+                    parent="menu_partner_management" 
+                    sequence="1"/>
+                <menuitem 
+                    id="menu_vendor_action"
+                    name = "Vendors" 
+                    action="account.res_partner_action_supplier"  
+                    parent="menu_partner_management" 
+                    sequence="2"/>
+            <!-- Group Menu Sequence 4 End -->
+            
+            <!-- Group Menu Sequence 5 Start -->
+            <menuitem 
+                id="menu_wms_report_management" 
+                name="Reporting"
+                parent="warehouse_management_system.menu_wms_root" 
+                sequence="5"/>
+                <!-- List Menu Sequence 5 -->
+                <menuitem 
+                    id="wms_standard_reporting"
+                    name = "--------------------------"  
+                    parent="menu_wms_report_management" 
+                    sequence="1"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_valuation_inherit"
+                        name = "Inventory Report" 
+                        action="stock.action_view_quants"
+                        parent="wms_standard_reporting" 
+                        sequence="1"/>
+                    <menuitem 
+                        id="menu_forecast_inventory_inherit"
+                        name = "Forecasted Inventory" 
+                        action="stock.report_stock_quantity_action"
+                        parent="wms_standard_reporting" 
+                        sequence="2"/>
+                    <menuitem 
+                        id="menu_inventory_valuation_inherit"
+                        name = "Inventory Valuation" 
+                        action="stock_account.stock_valuation_layer_action"
+                        parent="wms_standard_reporting" 
+                        sequence="3"/>
+                    <menuitem 
+                        id="menu_stock_move_inherit"
+                        name = "Stock Moves" 
+                        action="stock.stock_move_action"
+                        parent="wms_standard_reporting" 
+                        sequence="4"/>
+                    <menuitem 
+                        id="menu_product_move_inherit"
+                        name = "Product Moves" 
+                        action="stock.stock_move_line_action"
+                        parent="wms_standard_reporting" 
+                        sequence="5"/>
+                <menuitem 
+                    id="wms_additional_report"
+                    name = "--------------------------"  
+                    parent="menu_wms_report_management" 
+                    sequence="2"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_minimum_stock_report" 
+                        name="Minimum Stock Report"
+                        action="action_minimum_stock_report_wizard"
+                        parent="wms_additional_report"
+                        sequence="1"/>
+            <!-- Group Menu Sequence 5 End -->
+
+            <!-- Group Menu Sequence 6 Start -->
+            <menuitem 
+                id="menu_wms_configuration_management" 
+                name="Configuration"
+                parent="warehouse_management_system.menu_wms_root" 
+                sequence="6"/>
+                <!-- List Menu Sequence 6 -->
+                <menuitem 
+                    id="wms_warehouse_configuration"
+                    name = "Warehouse Management"  
+                    parent="menu_wms_configuration_management" 
+                    sequence="1"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_action_warehouse_form_inherit"
+                        name = "Warehouse" 
+                        action="stock.action_warehouse_form"
+                        parent="wms_warehouse_configuration" 
+                        sequence="1"/>
+                    <menuitem 
+                        id="menu_action_location_form_inherit"
+                        name = "Locations" 
+                        action="stock.action_location_form"
+                        parent="wms_warehouse_configuration" 
+                        sequence="2"/>
+                    <menuitem 
+                        id="stock_location_tag_menu_inherit"
+                        name = "Location Tag" 
+                        action="stock_3dbase.stock_location_tag_act_window"
+                        parent="wms_warehouse_configuration" 
+                        sequence="3"/>
+                    <menuitem 
+                        id="menu_action_rules_form_inherit"
+                        name = "Rules" 
+                        action="stock.action_rules_form"
+                        parent="wms_warehouse_configuration" 
+                        sequence="4"/>
+                    <menuitem 
+                        id="menu_routes_config_inherit"
+                        name = "Routes" 
+                        action="stock.action_routes_form"
+                        parent="wms_warehouse_configuration" 
+                        sequence="5"/>
+                    <menuitem 
+                        id="menu_pickingtype_inherit"
+                        name = "Operations Types" 
+                        action="stock.action_picking_type_list"
+                        parent="wms_warehouse_configuration" 
+                        sequence="6"/>
+                    <menuitem 
+                        id="menu_putaway_inherit"
+                        name = "Putaway Rules" 
+                        action="stock.action_putaway_tree"
+                        parent="wms_warehouse_configuration" 
+                        sequence="7"/>
+                <menuitem 
+                    id="wms_products_configuration"
+                    name = "Products"  
+                    parent="menu_wms_configuration_management" 
+                    sequence="2"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_product_category_config_stock_inherit"
+                        name = "Product Categories" 
+                        action="product.product_category_action_form"
+                        parent="wms_products_configuration" 
+                        sequence="1"/>
+                    <menuitem 
+                        id="menu_reordering_rules_config_inherit"
+                        name = "Reordering Rules" 
+                        action="stock.action_orderpoint"
+                        parent="wms_products_configuration" 
+                        sequence="2"/>
+                <menuitem 
+                    id="wms_uom_configuration"
+                    name = "Unit of Measures"  
+                    parent="menu_wms_configuration_management" 
+                    sequence="3"/>
+                    <!-- ### -->
+                    <menuitem 
+                        id="menu_stock_uom_categ_form_action_inherit"
+                        name = "UoM Categories" 
+                        action="uom.product_uom_categ_form_action"
+                        parent="wms_uom_configuration" 
+                        sequence="1"/>
+                    <menuitem 
+                        id="menu_stock_uom_form_action_inherit"
+                        name = "UoM" 
+                        action="uom.product_uom_form_action"
+                        parent="wms_uom_configuration" 
+                        sequence="2"/>
+            <!-- Group Menu Sequence 6 End -->
+</odoo>

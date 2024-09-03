@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_thinq_stock_inbound_fleet" model="ir.ui.view">
+            <field name="name">thinq.stock.inbound.fleet.form</field>
+            <field name="model">thinq.stock.inbound.fleet</field>
+            <field name="arch" type="xml">
+                <form string="Arrival">
+                    <header>
+                        <button name="create_stock_picking" type="object" string="Confirm" attrs="{'invisible': [('state', 'not in', ('draft'))]}"/>
+                        <button name="cancel" type="object" string="Cancel" attrs="{'invisible': [('state', 'not in', ('draft'))]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="warehouse_id"/>
+                            <field name="cust_po_no"/>
+                            <field name="date_in"/>
+                            <field name="netto_tonase"/>
+                            <field name="bruto_tonase"/>
+                            <field name="time_spend_timer"/>
+                            <field name="picking_id"/>
+                        </group>
+                        <field name="inbound_line_ids" mode="tree">
+                            <tree string="Product" editable="bottom">
+                                <field name="inbound_id" invisible="1"/>
+                                <field name="product_id"/>
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <field name="product_uom_id"/>
+                                <field name="product_qty"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Inbound-->
+        <record id="view_thinq_stock_inbound_fleet_tree" model="ir.ui.view">
+            <field name="name">thinq.stock.inbound.fleet.tree</field>
+            <field name="model">thinq.stock.inbound.fleet</field>
+            <field name="arch" type="xml">
+                <tree string="Arrival">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="cust_po_no"/>
+                    <field name="date_in"/>
+                    <field name="netto_tonase"/>
+                    <field name="bruto_tonase"/>
+                    <field name="time_spend_timer"/>
+                    <field name="picking_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_thinq_stock_inbound_fleet_view_search" model="ir.ui.view">
+            <field name="name">thinq.stock.inbound.fleet.search</field>
+            <field name="model">thinq.stock.inbound.fleet</field>
+            <field name="arch" type="xml">
+                <search string="Arrival">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_thinq_stock_inbound_fleet_form" model="ir.actions.act_window">
+            <field name="name">Arrival</field>
+            <field name="res_model">thinq.stock.inbound.fleet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="context">{'default_is_inbound': True}</field>
+            <field name="domain">[('is_inbound','=',True)]</field>
+            <field name="view_id" ref="view_thinq_stock_inbound_fleet_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new Arrival
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_thinq_stock_inbound_fleet_form" id="menu_action_thinq_stock_inbound_fleet_form"
+            parent="stock.menu_stock_warehouse_mgmt" sequence="99"/>
+
+        <!--Outbound-->
+        <record id="view_thinq_stock_outbound_fleet_tree" model="ir.ui.view">
+            <field name="name">thinq.stock.inbound.fleet.tree</field>
+            <field name="model">thinq.stock.inbound.fleet</field>
+            <field name="arch" type="xml">
+                <tree string="Delivery">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="cust_po_no"/>
+                    <field name="date_in"/>
+                    <field name="netto_tonase"/>
+                    <field name="bruto_tonase"/>
+                    <field name="time_spend_timer"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_thinq_stock_outbound_fleet_view_search" model="ir.ui.view">
+            <field name="name">thinq.stock.inbound.fleet.search</field>
+            <field name="model">thinq.stock.inbound.fleet</field>
+            <field name="arch" type="xml">
+                <search string="Delivery">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_thinq_stock_outbound_fleet_form" model="ir.actions.act_window">
+            <field name="name">Delivery</field>
+            <field name="res_model">thinq.stock.inbound.fleet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="context">{'default_is_inbound': False}</field>
+            <field name="domain">[('is_inbound','=',False)]</field>
+            <field name="view_id" ref="view_thinq_stock_outbound_fleet_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new Delivery
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_thinq_stock_outbound_fleet_form" id="menu_action_thinq_stock_outbound_fleet_form"
+            parent="stock.menu_stock_warehouse_mgmt" sequence="99"/>
+
+    </data>
+</odoo>

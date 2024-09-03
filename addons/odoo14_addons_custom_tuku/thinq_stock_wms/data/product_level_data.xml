@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="product_level_liquid" model="product.level">
+            <field name="name">Liquid</field>
+            <field name="active">True</field>
+        </record>
+        <record id="product_level_powder" model="product.level">
+            <field name="name">Powder</field>
+            <field name="active">True</field>
+        </record>
+        <record id="product_level_metal" model="product.level">
+            <field name="name">Metal</field>
+            <field name="active">True</field>
+        </record>
+    
+    </data>
+</odoo>

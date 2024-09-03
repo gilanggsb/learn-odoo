@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="thinq_inherit1_view_picking_form" model="ir.ui.view">
+            <field name="name">thinq.inherit1.stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <widget name="signature" highlight="1" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('id', '=', False), ('state', '!=', 'done')]}</attribute>
+                </widget>
+                <widget name="signature" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('id', '=', False), ('state', '=', 'done')]}</attribute>
+                </widget>
+            </field>
+        </record>
+
+        <record id="thinq_stock_wms_view_move_tree" model="ir.ui.view">
+            <field name="name">thinq.stock.wms.stock.move.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="time_spend_timer"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_stock_wms_view_stock_move_line_operation_tree" model="ir.ui.view">
+            <field name="name">thinq.stock.wms.move.line.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_uom_id" position="after">
+                    <field name="warehouse_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_stock_wms_view_stock_move_line_detailed_operation_tree" model="ir.ui.view">
+            <field name="name">thinq.stock.wms.move.line.detailed.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+            <field name="arch" type="xml">
+                <field name="package_id" position="after">
+                    <field name="borrowed_status" />
+                    <field name="warehouse_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- <record id="thinq_view_stock_quant_tree_editable" model="ir.ui.view">
+            <field name="name">thinq.view.stock.quant.tree.editable</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="product_default_code" readonly="1"/>
+                </field>
+            </field>
+        </record> -->
+
+        <record model="ir.ui.view" id="thinq_view_stock_quant_tree_inherit">
+            <field name="name">thinq.stock.quant.tree.inherit</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="product_default_code" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="thinq_view_stock_quant_tree_editable_inherit">
+            <field name="name">thinq.stock.quant.tree.editable.inherit</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="product_default_code" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    <!--
+        <record model="ir.ui.view" id="thinq_button_set_default_qty_view_picking_form">
+            <field name="name">thinq.button.set.default.qty.view.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header/button[last()]" position="after">
+                    <button name="action_set_default_qty_and_location" string="Set Qty and Location" class="btn btn-primary" type="object" attrs="{'invisible': ['|',('picking_type_code', 'not in', ('incoming')),('state', 'not in', ('confirmed','assigned'))]}"/>
+                </xpath>
+            </field>
+        </record>
+    -->
+    </data>
+</odoo>
+
+
+
+
+
+
+
+  
+  

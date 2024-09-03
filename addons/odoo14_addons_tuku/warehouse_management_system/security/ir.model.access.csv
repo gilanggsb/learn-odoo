@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_production_batch,mrp.production.batch user,model_mrp_production_batch,mrp.group_mrp_user,1,1,1,1
+access_mrp_production_batch_line,mrp.production.batch.line user,model_mrp_production_batch_line,mrp.group_mrp_user,1,1,1,1
+access_mrp_production_batch_line_material,mrp.production.batch.line.material user,model_mrp_production_batch_line_material,mrp.group_mrp_user,1,1,1,1
+access_stock_warehouse_orderpoint_wizard,stock.warehouse.orderpoint.wizard user,model_stock_warehouse_orderpoint_wizard,base.group_user,1,1,1,1

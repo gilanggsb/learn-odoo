@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="paperformat_report_do" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_report_ba" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_report_do" model="ir.actions.report">
+            <field name="name">Surat Pengiriman Barang</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">thinq_stock_wms.report_do</field>
+            <field name="report_file">thinq_stock_wms.report_do</field>
+            <field name="print_report_name">'Surat Pengiriman Barang - %s - %s' % (object.partner_id.name or '', object.name)</field>
+            <field name="paperformat_id" ref="thinq_stock_wms.paperformat_report_do"/>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_gr" model="ir.actions.report">
+            <field name="name">Surat Penerimaan Barang</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">thinq_stock_wms.report_gr</field>
+            <field name="report_file">thinq_stock_wms.report_gr</field>
+            <field name="print_report_name">'Surat Penerimaan Barang - %s - %s' % (object.partner_id.name or '', object.name)</field>
+            <field name="paperformat_id" ref="thinq_stock_wms.paperformat_report_do"/>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_daily_inventory" model="ir.actions.report">
+            <field name="name">Report Daily Inventory</field>
+            <field name="model">wiz.daily.inventory</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">thinq_stock_wms.report_daily_inventory</field>
+            <field name="report_file">thinq_stock_wms.report_daily_inventory</field>
+            <field name="print_report_name">'Report Daily Inventory %s - %s' % (object.date_from , object.date_to)</field>
+            <field name="paperformat_id" ref="thinq_stock_wms.paperformat_report_do"/>
+            <field name="binding_model_id" ref="model_wiz_daily_inventory"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_daily_inventory" model="ir.actions.report">
+            <field name="name">Form Berita Acara</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">thinq_stock_wms.report_ba</field>
+            <field name="report_file">thinq_stock_wms.report_ba</field>
+            <field name="print_report_name">'Form Berita Acara %s' % (object.name)</field>
+            <field name="paperformat_id" ref="thinq_stock_wms.paperformat_report_do"/>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+    
+</odoo>

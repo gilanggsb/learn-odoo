@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- © 2021 Thinq Technology -->
+
+        <record id="thinq_inherit1_product_template_form_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.product.template.common.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <group name="group_general" position="inside">
+                    <field name="sku_number"/>
+                    <field name="customer_id"/>
+                    <field name="level_id"/>
+                    <field name="image_url" widget="url"/>
+                    <button name="upload_image" type="object" string="Upload Image"/>
+                </group>
+            </field>
+        </record>
+        <record id="thinq_inherit1_product_template_tree_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.product.template.product.tree</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="sku_number"/>
+                    <field name="level_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+        <record id="thinq_inherit1_product_template_search_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.product.template.search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <field name="name" string="Product" 
+                        filter_domain="['|', '|', '|', '|', ('default_code', 'ilike', self),('sku_number', 'ilike', self), ('product_variant_ids.default_code', 'ilike', self),('name', 'ilike', self), ('barcode', 'ilike', self)]"/>
+                </field>
+                <field name="pricelist_id" position="after">
+                    <field name="customer_id"/>
+                    <field name="level_id"/>
+                </field>
+                <xpath expr="//search/group" position="inside">
+                    <filter string="Customer" name="customer_id" context="{'group_by':'customer_id'}"/>
+                    <filter string="Level (Kadar)" name="product_level" context="{'group_by':'level_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="thinq_inherit1_view_product_product_form" model="ir.ui.view">
+            <field name="name">thinq.inherit1.view.product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref = "product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <button name="action_activate_expired_product" string="Activate Product" type="object"
+                            class="oe_read_only" icon="fa-pencil-square-o"
+                            groups="product.group_product_variant,stock.group_stock_manager"/>
+                </xpath>
+                <field name="barcode" position="after">
+                    <field name="sku_number"/>
+                    <field name="image_url" widget="url"/>
+                    <button name="upload_image" type="object" string="Upload Image"/>
+
+                    <field name="expired_date"/>
+                    <label for="expiration_reminder_days" attrs="{'invisible': [('expired_date', '=', False)]}"/>
+                    <div class="o_row">
+                        <field name="expiration_reminder_days" class="oe_inline" nolabel="1"
+                            attrs="{'invisible': [('expired_date', '=', False)]}"/>
+                        <span> days</span>
+                    </div>
+
+                    <field name="mul_max_stock"/>
+                    <field name="mul_min_stock"/>
+                    <field name="delivery_time"/>
+                    <field name="daily_usage"/>
+                    <field name="max_stock"/>
+                    <field name="min_stock"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_inherit1_view_product_product_search_form_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.view.product.product.search.form.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref = "product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <field name="name" string="Product" 
+                        filter_domain="['|', '|', '|', ('default_code', 'ilike', self), ('name', 'ilike', self), ('barcode', 'ilike', self), ('sku_number', 'ilike', self)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="thinq_inherit1_product_product_tree_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.product.product.tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref = "product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="before">
+                    <field name="expiration_reminder_days" invisible="1"/>
+                    <field name="expire_days_left" invisible="1"/>
+                </field>
+                <field name="default_code" position="after">
+                    <field name="sku_number"/>
+                </field>
+                <xpath expr="//tree"  position="attributes">
+                    <attribute name="decoration-warning">expire_days_left>0 and expire_days_left&lt;expiration_reminder_days</attribute>
+                    <attribute name="decoration-danger">expire_days_left==0</attribute>
+                    <attribute name="decoration-muted">active==0</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_product_expiration_send_reminder" model="ir.actions.server">
+            <field name="name">Send Expiration Reminder</field>
+            <field name="model_id" ref="product.model_product_product"/>
+            <field name="binding_model_id" ref="product.model_product_product"/>
+            <field name='groups_id' eval="[(4, ref('thinq_stock_wms.group_send_expiration_reminder'))]"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records._send_expiration_reminder_mail(send_single=True)
+            </field>
+        </record>
+
+    </data>
+</odoo>

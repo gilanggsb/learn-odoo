@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <template id="report_do">
+            <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="doc">
+                        <style>
+                            table {
+                                border-collapse: collapse;
+                              }     
+                              tr.border-bottom {
+                                border-bottom: 1px solid black;
+                              }
+                              tr.border-top {
+                                border-top: 1px solid black;
+                              }
+                              
+                        </style>
+                        <div class="header">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="vertical-align: top;"><img class="img img-responsive"
+                                        src="/thinq_stock_wms/static/description/logotuku.png"
+                                        style="height: 100px;width:100px;float:left;"
+                                        /></td>
+                                    <td style="vertical-align: top;"><h4 class="text-center"><b>Surat Pengiriman Barang</b></h4></td>
+                                    <td style="vertical-align: top;" class="text-right"> <img class="img img-responsive"
+                                        src="/thinq_stock_wms/static/description/logocas.png"
+                                        style="height: 70px;width:80px;float:right;"
+                                        /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <div style="margin-top:140px;"></div>
+                            <div>
+                                <!-- <div style="font-style: normal;" t-esc="doc.warehouse_id.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>    -->
+                                <t t-set="partner" t-value="doc.warehouse_id.partner_id"/>    
+                                <!-- <t t-set="cityzip" t-value="partner.city+' '+partner.zip"/> -->
+                                <div><t t-esc="doc.warehouse_id.name"/></div>
+                                <div><t t-esc="partner.street"/></div>
+                                <div><t t-esc="partner.street2"/></div>
+                                <div><t t-esc="partner.city"/> <t t-esc="partner.zip"></t></div>
+                                <t t-if="doc.picking_type_id.warehouse_id.partner_id.phone">
+                                    Phone: <span><t t-esc="doc.picking_type_id.warehouse_id.partner_id.phone"/></span>
+                                </t>
+                            </div>
+                            <div style="margin-top:30px;">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="background-color:#00bfff; width:50%;"><b>SHIPMENT INFO:</b></td>
+                                        <td style="background-color:#00bfff; width:50%;"><b>SHIP TO:</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: top;">
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td class="text=left" style="font-weight: bold;">Reference Number:</td>
+                                                    <td class="text-right" style="font-weight: bold;">
+                                                        <span t-esc="doc.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text=left" style="font-weight: bold;">SPB Date:</td>
+                                                    <td class="text-right">
+                                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y')"/>   
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text=left" style="font-weight: bold;">RSO Number:</td>
+                                                    <td class="text-right">
+                                                        <span t-esc="doc.origin"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr><td><t t-esc="doc.partner_id.name"/></td></tr>
+                                                <tr><td><t t-esc="doc.partner_id.street"/></td></tr>
+                                                <tr><td><t t-esc="doc.partner_id.street2"/></td></tr>
+                                                <tr><td><t t-esc="doc.partner_id.city"/> <t t-esc="doc.partner_id.zip"/></td></tr>
+                                                <tr><td><t t-esc="doc.partner_id.country_id.name"/></td></tr>
+                                                <tr><td>Delivery Date: <t t-esc="doc.date_done"/></td></tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>     
+                            </div>
+                                
+                            <div style="margin-top:40px;">
+                                <table style="width:100%;">
+                                    <tr style="background-color:#00bfff;">
+                                        <th rowspan="2" style="text-align:left;">NO.</th>
+                                        <th rowspan="2" style="text-align:left;">ITEM</th>
+                                        <th rowspan="2" style="text-align:left;">UOM</th>
+                                        <th colspan="3">QTY</th>
+                                        <th rowspan="2">NOTES</th>
+                                    </tr>
+                                    <tr style="background-color:#00bfff;">
+                                        <th>Ordered</th>
+                                        <th>Prepared</th>
+                                        <th>Received</th>
+                                    </tr>
+                                    <t t-set="no" t-value="0"/>
+                                    <tr t-foreach="doc.move_ids_without_package" t-as="line">
+                                        <t t-set="no" t-value="no+1"/>
+                                        <td><span t-esc="no"/></td>
+                                        <td style="word-wrap: break-word;"><span t-field="line.product_id"/></td>
+                                        <td><span t-field="line.product_uom"/></td>
+                                        <td style="text-align:right"><span t-field="line.product_uom_qty"/></td>
+                                        <td style="text-align:right"><span t-field="line.forecast_availability"/></td>
+                                        <td style="text-align:right">
+                                            <t t-if="line.quantity_done > 0">
+                                                <span t-field="line.quantity_done"/>
+                                            </t>
+                                        </td>
+                                        <td style="word-wrap: break-word;"><span t-field="line.note"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div style="margin-top:30px;">
+                                <table style="width:100%;">
+                                    <tr class="border-top">
+                                        <td>Bagian Gudang</td>
+                                        <td>Disiapkan Oleh:</td>
+                                        <td><i><span t-esc="doc.warehouse_id.name"/></i></td>
+                                        <td>Tanda Tangan:</td>
+                                        <td>Tanggal:</td>
+                                        <td>Jam:</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:40px;"><i><span t-esc="doc.date_done" /></i></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Diperiksa Oleh:</td>
+                                        <td></td>
+                                        <td>Tanda Tangan:</td>
+                                        <td>Tanggal:</td>
+                                        <td>Jam:</td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Penerima</td>
+                                        <td>Diterima Oleh:</td>
+                                        <td></td>
+                                        <td>Tanda Tangan:</td>
+                                        <td>Tanggal:</td>
+                                        <td>Jam:</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                        <td style="padding-bottom:60px;"></td>
+                                    </tr>
+                                    <tr class="border-top border-bottom">
+                                        <td>Dikirim Oleh:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Pemeriksaan Security:</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" style="padding-bottom:20px;"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

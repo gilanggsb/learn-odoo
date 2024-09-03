@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- © 2021 Thinq Technology -->
+
+        <record id="action_customer_partner_list" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form,activity</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="context">{'search_default_customer': 1,'res_partner_search_mode': 'customer', 'default_is_company': True, 'default_customer_rank': 1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new customer in your address book
+              </p><p>
+                Odoo helps you easily track all activities related to a customer.
+              </p>
+            </field>
+        </record>
+        <record id="thinq_inherit1_res_partner_view_search" model="ir.ui.view">
+            <field name="name">thinq.inherit1.res.partner.search.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.res_partner_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='customer']" position="attributes">
+                    <attribute name="string">Customer</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='supplier']" position="attributes">
+                    <attribute name="string">Vendor / Supplier</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem id="menu_customer_partner_stock"
+            action="thinq_stock_wms.action_customer_partner_list"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="99" groups="stock.group_stock_manager,stock.group_stock_user"/>
+
+        <record id="thinq_inherit1_view_partner_form" model="ir.ui.view">
+            <field name="name">thinq.inherit1.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="action_view_customer_location" type="object" icon="fa-bars" 
+                        attrs="{'invisible': [('location_count', '=', 0)]}">
+                        <field name="location_count" widget="statinfo" string="Locations"/>
+                    </button>
+                </div>
+                <xpath expr="//form/sheet/notebook" position="inside">
+                    <page string="Locations" name="location_list">
+                        <field name="location_ids" widget="many2many" nolabel="1"/>
+                    </page>
+                    <page string="Warehouses" name="warehouse_list">
+                        <field name="warehouse_ids" widget="many2many" nolabel="1"/>
+                    </page>
+                    <page string="Customer Product List" name="product_list">
+                        <field name="product_line_ids" mode="tree" nolabel="1"/>
+                    </page>
+                </xpath>
+                <xpath expr="//form/sheet/group" position="inside">
+                    <group string="Customer Portal Authentication" name="customer_auth">
+                        <field name="username" 
+                            groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/>
+                        <field name="password" password="True" 
+                            groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/>
+                        <field name="token" 
+                            groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/>
+                        <!-- <field name="is_mobileappuser" 
+                            groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/>
+                        <field name="warehouse_id" 
+                            groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/> -->
+                    </group>
+                    <group name='url_image'>
+                        <field name="image_url" widget="url"/>
+                        <button name="upload_image" type="object" string="Upload Image"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='child_ids']/form/sheet/group/group[2]" position="inside">
+                    <field name="username" 
+                        groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/>
+                    <field name="password" password="True" 
+                        groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/>
+                    <field name="token" 
+                        groups="base.group_erp_manager,base.group_no_one,stock.group_stock_manager"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Thinq Mobile Protal Access Right -->
+        <!-- Menu -->
+        <record id="view_thinq_menu_form" model="ir.ui.view">
+            <field name="name">thinq.menu.form</field>
+            <field name="model">thinq.menu</field>
+            <field name="arch" type="xml">
+                <form string="Menu">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                        <group>
+                            <field name="module"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_thinq_menu_tree" model="ir.ui.view">
+            <field name="name">thinq.menu.tree</field>
+            <field name="model">thinq.menu</field>
+            <field name="arch" type="xml">
+                <tree string="Menu">
+                    <field name="name"/>
+                    <field name="module"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_thinq_menu" model="ir.actions.act_window">
+            <field name="name">Menu</field>
+            <field name="res_model">thinq.menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" ref="view_thinq_menu_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new Menu
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_thinq_menu"
+            action="thinq_stock_wms.action_thinq_menu"
+            parent="stock.menu_warehouse_config"
+            sequence="99" groups="stock.group_stock_manager,stock.group_stock_user"/>
+
+        <!-- Menu Access Right -->
+        <record id="view_thinq_access_right_form" model="ir.ui.view">
+            <field name="name">thinq.access.right.form</field>
+            <field name="model">thinq.access.right</field>
+            <field name="arch" type="xml">
+                <form string="Access Right">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="menu_id"/>
+                            <field name="can_view"/>
+                            <field name="can_edit"/>
+                            <field name="can_delete"/>
+                            <field name="can_approve"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_thinq_access_right_tree" model="ir.ui.view">
+            <field name="name">thinq.access.right.tree</field>
+            <field name="model">thinq.access.right</field>
+            <field name="arch" type="xml">
+                <tree string="Access Right">
+                    <field name="name"/>
+                    <field name="menu_id"/>
+                    <field name="can_view"/>
+                    <field name="can_edit"/>
+                    <field name="can_delete"/>
+                    <field name="can_approve"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_thinq_access_right" model="ir.actions.act_window">
+            <field name="name">Access Right</field>
+            <field name="res_model">thinq.access.right</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" ref="view_thinq_access_right_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new Access Right
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_thinq_access_right"
+            action="thinq_stock_wms.action_thinq_access_right"
+            parent="stock.menu_warehouse_config"
+            sequence="99" groups="stock.group_stock_manager,stock.group_stock_user"/>
+
+        <!-- Menu Access Right User -->
+        <record id="view_thinq_user_access_right_form" model="ir.ui.view">
+            <field name="name">thinq.user.access.right.form</field>
+            <field name="model">thinq.user.access.right</field>
+            <field name="arch" type="xml">
+                <form string="User Access Right">
+                    <sheet>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="access_right_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_thinq_user_access_right_tree" model="ir.ui.view">
+            <field name="name">thinq.user.access.right.tree</field>
+            <field name="model">thinq.user.access.right</field>
+            <field name="arch" type="xml">
+                <tree string="User Access Right">
+                    <field name="partner_id"/>
+                    <field name="access_right_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_thinq_user_access_right" model="ir.actions.act_window">
+            <field name="name">User Access Right</field>
+            <field name="res_model">thinq.user.access.right</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" ref="view_thinq_user_access_right_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new User Access Right 
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_thinq_user_access_right"
+            action="thinq_stock_wms.action_thinq_user_access_right"
+            parent="stock.menu_warehouse_config"
+            sequence="99" groups="stock.group_stock_manager,stock.group_stock_user"/>
+    </data>
+</odoo>

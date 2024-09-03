@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_base_thinq_stock_inbound_fleet,access_base_thinq_stock_inbound_fleet,model_thinq_stock_inbound_fleet,base.group_user,1,1,1,0
+access_base_thinq_stock_inbound_fleet_line,access_base_thinq_stock_inbound_fleet_line,model_thinq_stock_inbound_fleet_line,base.group_user,1,1,1,0

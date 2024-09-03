@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="warehouse_orderpoint_tree_inherit" model="ir.ui.view">
+            <field name="name">stock.warehouse.orderpoint.tree.inherit</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree_editable"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_max_qty']" position="after">
+                    <field name="qty_buffer" optional="show"/>
+                </xpath>
+                <xpath expr="//field[@name='qty_forecast']" position="replace">
+                    <field name="qty_forecast" force_save="1" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='route_id']" position="replace">
+                    <field name="route_id" options="{'no_create': True, 'no_open': True}" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='json_lead_days_popover']" position="replace">
+                    <field name="json_lead_days_popover" optional="hide" nolabel="1" string="Forecast Description" width="10px" widget="popover_widget" attrs="{'invisible': [('id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

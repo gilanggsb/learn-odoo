@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    <!-- © 2021 Thinq Technology -->
+
+        <record id="stock_wms_dashboard_advance" model="ks_dashboard_ninja.board_template">
+            <field name="name">WMS Dashbboard 2</field>
+            <field name="ks_gridstack_config">[
+                {"item_id":"thinq_wms_dashboard.stock_wms_board_item1", "data": {"x":20,"y":0,"w":10,"h":2}},
+                {"item_id":"thinq_wms_dashboard.stock_wms_board_item2", "data": {"x":10,"y":0,"w":10,"h":2}},
+                {"item_id":"thinq_wms_dashboard.stock_wms_board_item3", "data": {"x":0,"y":0,"w":10,"h":2}},
+                {"item_id":"thinq_wms_dashboard.stock_wms_board_item4", "data": {"x":16,"y":2,"w":16,"h":6}},
+                {"item_id":"thinq_wms_dashboard.stock_wms_board_item5", "data": {"x":0,"y":2,"w":16,"h":6}},
+                {"item_id":"thinq_wms_dashboard.stock_wms_board_item6", "data": {"x":0,"y":0,"w":15,"h":8}},
+                {"item_id":"thinq_wms_dashboard.stock_wms_board_item7", "data": {"x":0,"y":4,"w":15,"h":8}}
+                ]
+            </field>
+            <field name="ks_item_count">7</field>
+        </record>
+        <record id="stock_wms_board_item1" model="ks_dashboard_ninja.item">
+            <field name="name">Assigned</field>
+            <field name="ks_dashboard_item_type">ks_tile</field>
+            <field name="ks_record_count_type">count</field>
+            <field name="ks_model_id" eval="ref('stock.model_stock_picking')"/>
+            <field name="ks_domain">[[&quot;state&quot;,&quot;=&quot;,&quot;assigned&quot;]]</field>
+            <field name="ks_default_icon">check-square-o</field>
+            <field name="ks_header_bg_color">#8e24aa,0.99</field>
+            <field name="ks_background_color">#5cb85c,0.99</field>
+            <!-- <field name="ks_font_color">#ffffff,0.99</field>
+            <field name="ks_default_icon_color">#ffffff,0.99</field>
+            <field name="ks_layout">layout1</field>
+            <field name="ks_company_id" eval="0"/>
+            <field name="ks_icon">false</field>
+            <field name="ks_icon_select">Default</field>
+            <field name="ks_chart_item_color">default</field>
+            <field name="ks_chart_groupby_type">other</field>
+            <field name="ks_chart_relation_groupby">false</field>
+            <field name="ks_chart_data_count_type">sum</field>
+            <field name="ks_chart_sub_groupby_type">other</field>
+            <field name="ks_chart_measure_field"></field>
+            <field name="ks_date_filter_field">create_date</field>
+            <field name="ks_record_count_type_2">sum</field>
+            <field name="ks_list_view_type">ungrouped</field>
+            <field name="ks_auto_update_type">ks_live_update</field>
+            <field name="ks_show_data_value">false</field>
+            <field name="ks_show_live_pop_up">true</field>
+            <field name="ks_update_items_data">false</field>
+            <field name="ks_show_records">true</field>
+            <field name="ks_hide_legend">true</field>
+            <field name="ks_export_all_records">true</field>
+            <field name="ks_record_data_limit_visibility">false</field>
+            <field name="ks_data_format">global</field>
+            <field name="ks_pagination_limit">15</field>
+            <field name="ks_chart_cumulative_field">false</field>
+            <field name="ks_chart_cumulative">false</field>
+            <field name="ks_button_color">#000000,0.99</field> -->
+            <!-- <field name="ks_date_filter_field" eval="ref('stock.field_stock_picking__create_date')"/> -->
+        </record>
+        <record id="stock_wms_board_item2" model="ks_dashboard_ninja.item">
+            <field name="name">Done / Finished</field>
+            <field name="ks_dashboard_item_type">ks_tile</field>
+            <field name="ks_record_count_type">count</field>
+            <field name="ks_record_count">10</field>
+            <field name="ks_model_id" eval="ref('stock.model_stock_picking')"/>
+            <field name="ks_domain">[[&quot;state&quot;,&quot;=&quot;,&quot;done&quot;]]</field>
+            <field name="ks_default_icon">check</field>
+            <field name="ks_header_bg_color">#8e24aa,0.99</field>
+            <field name="ks_background_color">#337ab7,0.99</field>
+            <field name="ks_font_color">#ffffff,0.99</field>
+            <field name="ks_default_icon_color">#ffffff,0.99</field>
+            <field name="ks_layout">layout1</field>
+            <field name="ks_company_id" eval="0"/>
+            <field name="ks_icon">false</field>
+            <field name="ks_icon_select">Default</field>
+            <field name="ks_chart_item_color">default</field>
+            <field name="ks_chart_groupby_type">other</field>
+            <field name="ks_chart_relation_groupby">false</field>
+            <field name="ks_chart_data_count_type">sum</field>
+            <field name="ks_chart_sub_groupby_type">other</field>
+            <field name="ks_chart_measure_field"></field>
+            <!-- <field name="ks_date_filter_field" eval="ref('stock.field_stock_picking__create_date')"/> -->
+            <field name="ks_date_filter_field">create_date</field>
+            <field name="ks_record_count_type_2">sum</field>
+            <field name="ks_list_view_type">ungrouped</field>
+            <field name="ks_auto_update_type">ks_live_update</field>
+            <field name="ks_show_data_value">false</field>
+            <field name="ks_show_live_pop_up">true</field>
+            <field name="ks_update_items_data">false</field>
+            <field name="ks_show_records">true</field>
+            <field name="ks_hide_legend">true</field>
+            <field name="ks_export_all_records">true</field>
+            <field name="ks_record_data_limit_visibility">false</field>
+            <field name="ks_data_format">global</field>
+            <field name="ks_pagination_limit">15</field>
+            <field name="ks_chart_cumulative_field">false</field>
+            <field name="ks_chart_cumulative">false</field>
+            <field name="ks_button_color">#000000,0.99</field>
+        </record>
+        <record id="stock_wms_board_item3" model="ks_dashboard_ninja.item">
+            <field name="name">Waiting</field>
+            <field name="ks_dashboard_item_type">ks_tile</field>
+            <field name="ks_record_count_type">count</field>
+            <field name="ks_record_count">0</field>
+            <field name="ks_model_id" eval="ref('stock.model_stock_picking')"/>
+            <field name="ks_domain">[&quot;|&quot;,[&quot;state&quot;,&quot;=&quot;,&quot;waiting&quot;],[&quot;state&quot;,&quot;=&quot;,&quot;confirmed&quot;]]</field>
+            <field name="ks_default_icon">truck</field>
+            <field name="ks_header_bg_color">#8e24aa,0.99</field>
+            <field name="ks_background_color">#f0ad4e,0.99</field>
+            <field name="ks_font_color">#ffffff,0.99</field>
+            <field name="ks_default_icon_color">#ffffff,0.99</field>
+            <field name="ks_layout">layout1</field>
+            <field name="ks_company_id" eval="0"/>
+            <field name="ks_icon">false</field>
+            <field name="ks_icon_select">Default</field>
+            <field name="ks_chart_item_color">default</field>
+            <field name="ks_chart_groupby_type">other</field>
+            <field name="ks_chart_relation_groupby">false</field>
+            <field name="ks_chart_data_count_type">sum</field>
+            <field name="ks_chart_sub_groupby_type">other</field>
+            <field name="ks_chart_measure_field"></field>
+            <!-- <field name="ks_date_filter_field" eval="ref('stock.field_stock_picking__create_date')"/> -->
+            <field name="ks_date_filter_field">create_date</field>
+            <field name="ks_record_count_type_2">sum</field>
+            <field name="ks_list_view_type">ungrouped</field>
+            <field name="ks_auto_update_type">ks_live_update</field>
+            <field name="ks_show_data_value">false</field>
+            <field name="ks_show_live_pop_up">true</field>
+            <field name="ks_update_items_data">false</field>
+            <field name="ks_show_records">true</field>
+            <field name="ks_hide_legend">true</field>
+            <field name="ks_export_all_records">true</field>
+            <field name="ks_record_data_limit_visibility">false</field>
+            <field name="ks_data_format">global</field>
+            <field name="ks_pagination_limit">15</field>
+            <field name="ks_chart_cumulative_field">false</field>
+            <field name="ks_chart_cumulative">false</field>
+            <field name="ks_button_color">#000000,0.99</field>
+        </record>
+        <record id="stock_wms_board_item4" model="ks_dashboard_ninja.item">
+            <field name="name">New / Draft</field>
+            <field name="ks_dashboard_item_type">ks_tile</field>
+            <field name="ks_record_count_type">count</field>
+            <field name="ks_record_count">1</field>
+            <field name="ks_model_id" eval="ref('stock.model_stock_picking')"/>
+            <field name="ks_domain">[[&quot;state&quot;,&quot;=&quot;,&quot;draft&quot;]]</field>
+            <field name="ks_default_icon">user-plus</field>
+            <field name="ks_header_bg_color">#8e24aa,0.99</field>
+            <field name="ks_background_color">#f45300,0.99</field>
+            <field name="ks_font_color">#00000,0.99</field>
+            <field name="ks_default_icon_color">#ffffff,0.99</field>
+            <field name="ks_layout">layout1</field>
+            <field name="ks_company_id" eval="0"/>
+            <field name="ks_icon">false</field>
+            <field name="ks_icon_select">Default</field>
+            <field name="ks_chart_item_color">default</field>
+            <field name="ks_chart_groupby_type">other</field>
+            <field name="ks_chart_relation_groupby">false</field>
+            <field name="ks_chart_data_count_type">sum</field>
+            <field name="ks_chart_sub_groupby_type">other</field>
+            <field name="ks_chart_measure_field"></field>
+            <!-- <field name="ks_date_filter_field" eval="ref('stock.field_stock_picking__create_date')"/> -->
+            <field name="ks_date_filter_field">create_date</field>
+            <field name="ks_record_count_type_2">sum</field>
+            <field name="ks_list_view_type">ungrouped</field>
+            <field name="ks_auto_update_type">ks_live_update</field>
+            <field name="ks_show_data_value">false</field>
+            <field name="ks_show_live_pop_up">true</field>
+            <field name="ks_update_items_data">false</field>
+            <field name="ks_show_records">true</field>
+            <field name="ks_hide_legend">true</field>
+            <field name="ks_export_all_records">true</field>
+            <field name="ks_record_data_limit_visibility">false</field>
+            <field name="ks_data_format">global</field>
+            <field name="ks_pagination_limit">15</field>
+            <field name="ks_chart_cumulative_field">false</field>
+            <field name="ks_chart_cumulative">false</field>
+            <field name="ks_button_color">#000000,0.99</field>
+        </record>
+        <record id="stock_wms_board_item5" model="ks_dashboard_ninja.item">
+            <field name="name">Cancelled</field>
+            <field name="ks_dashboard_item_type">ks_tile</field>
+            <field name="ks_record_count_type">count</field>
+            <field name="ks_record_count">2</field>
+            <field name="ks_model_id" eval="ref('stock.model_stock_picking')"/>
+            <field name="ks_domain">[[&quot;state&quot;,&quot;=&quot;,&quot;cancel&quot;]]</field>
+            <field name="ks_default_icon">calendar-times-o</field>
+            <field name="ks_header_bg_color">#8e24aa,0.99</field>
+            <field name="ks_background_color">#d9534f,0.99</field>
+            <field name="ks_font_color">#00000,0.99</field>
+            <field name="ks_default_icon_color">#ffffff,0.99</field>
+            <field name="ks_layout">layout1</field>
+            <field name="ks_company_id" eval="0"/>
+            <field name="ks_icon">false</field>
+            <field name="ks_icon_select">Default</field>
+            <field name="ks_chart_item_color">default</field>
+            <field name="ks_chart_groupby_type">other</field>
+            <field name="ks_chart_relation_groupby">false</field>
+            <field name="ks_chart_data_count_type">sum</field>
+            <field name="ks_chart_sub_groupby_type">other</field>
+            <field name="ks_chart_measure_field"></field>
+            <!-- <field name="ks_date_filter_field" eval="ref('stock.field_stock_picking__create_date')"/> -->
+            <field name="ks_date_filter_field">create_date</field>
+            <field name="ks_record_count_type_2">sum</field>
+            <field name="ks_list_view_type">ungrouped</field>
+            <field name="ks_auto_update_type">ks_live_update</field>
+            <field name="ks_show_data_value">false</field>
+            <field name="ks_show_live_pop_up">true</field>
+            <field name="ks_update_items_data">false</field>
+            <field name="ks_show_records">true</field>
+            <field name="ks_hide_legend">true</field>
+            <field name="ks_export_all_records">true</field>
+            <field name="ks_record_data_limit_visibility">false</field>
+            <field name="ks_data_format">global</field>
+            <field name="ks_pagination_limit">15</field>
+            <field name="ks_chart_cumulative_field">false</field>
+            <field name="ks_chart_cumulative">false</field>
+            <field name="ks_button_color">#000000,0.99</field>
+        </record>
+        <record id="stock_wms_board_item6" model="ks_dashboard_ninja.item">
+            <field name="name">Top 10 Customers</field>
+            <field name="ks_dashboard_item_type">ks_bar_chart</field>
+            <field name="ks_record_count_type">count</field>
+            <field name="ks_model_id" eval="ref('sale.model_sale_order')"/>
+            <field name="ks_domain">[[&quot;state&quot;,&quot;!=&quot;,&quot;cancel&quot;]]</field>
+            <field name="ks_default_icon">bar-chart</field>
+            <field name="ks_header_bg_color">#8e24aa,0.99</field>
+            <field name="ks_background_color">#ffffff,0.99</field>
+            <field name="ks_font_color">#000000,0.99</field>
+            <field name="ks_default_icon_color">#00000,0.99</field>
+            <field name="ks_chart_item_color">cool</field>
+            <field name="ks_chart_groupby_type">relational_type</field>
+            <!-- <field name="ks_chart_relation_groupby" eval="ref('sale.field_sale_order__partner_id')"/> -->
+            <field name="ks_chart_relation_groupby">partner_id</field>
+            <field name="ks_chart_date_groupby">false</field>
+            <field name="ks_record_field">false</field>
+            <field name="ks_chart_sub_groupby_type">other</field>
+            <field name="ks_chart_relation_sub_groupby">false</field>
+            <field name="ks_chart_date_sub_groupby">false</field>
+            <field name="ks_chart_data_count_type">sum</field>
+            <!-- <field name="ks_chart_measure_field" eval="[(6, 0, [ref('sale.field_sale_order__amount_total')])]"/> -->
+            <field name="ks_chart_measure_field">amount_total</field>
+            <!-- <field name="ks_date_filter_field" eval="ref('sale.field_sale_order__create_date')"/> -->
+            <field name="ks_date_filter_field">create_date</field>
+            <field name="ks_layout">layout1</field>
+            <field name="ks_icon">false</field>
+            <field name="ks_record_count_type_2">sum</field>
+            <field name="ks_list_view_type">ungrouped</field>
+            <field name="ks_record_data_limit">10</field>
+            <field name="ks_sort_by_order">DESC</field>
+            <field name="ks_sort_by_field">date_order</field>
+            <field name="ks_goal_enable">false</field>
+            <field name="ks_standard_goal_value">0</field>
+            <field name="ks_date_filter_selection">l_none</field>
+            <field name="ks_item_end_date">false</field>
+            <field name="ks_item_start_date_2">false</field>
+            <field name="ks_item_end_date_2">false</field>
+            <field name="ks_previous_period">false</field>
+            <field name="ks_date_filter_selection_2">l_none</field>
+            <field name="ks_target_view">Number</field>
+            <field name="ks_show_data_value">true</field>
+            <field name="ks_show_live_pop_up">true</field>
+            <field name="ks_auto_update_type">ks_live_update</field>
+            <field name="ks_update_items_data">false</field>
+            <field name="ks_list_target_deviation_field">false</field>
+            <field name="ks_unit">false</field>
+            <field name="ks_show_records">true</field>
+            <field name="ks_hide_legend">true</field>
+            <field name="ks_export_all_records">true</field>
+            <field name="ks_record_data_limit_visibility">true</field>
+            <field name="ks_data_format">global</field>
+            <field name="ks_pagination_limit">15</field>
+            <field name="ks_chart_cumulative_field">false</field>
+            <field name="ks_chart_cumulative">false</field>
+            <field name="ks_button_color">#000000,0.99</field>
+        </record>
+        <record id="stock_wms_board_item7" model="ks_dashboard_ninja.item">
+            <field name="name">Top 10 Products Sold</field>
+            <field name="ks_dashboard_item_type">ks_pie_chart</field>
+            <field name="ks_model_id" eval="ref('sale.model_sale_order_line')"/>
+            <field name="ks_record_count_type">count</field>
+            <field name="ks_default_icon">bar-chart</field>
+            <field name="ks_default_icon_color">#00000,0.99</field>
+            <field name="ks_domain">[&quot;|&quot;,[&quot;state&quot;,&quot;=&quot;,&quot;sale&quot;],[&quot;state&quot;,&quot;=&quot;,&quot;done&quot;]]</field>
+            <field name="ks_header_bg_color">#8e24aa,0.99</field>
+            <field name="ks_background_color">#ffffff,0.99</field>
+            <field name="ks_font_color">#000000,0.99</field>
+            <field name="ks_sort_by_field">create_date</field>
+            <!-- <field name="ks_date_filter_field" eval="ref('sale.field_sale_order_line__create_date')"/> -->
+            <field name="ks_date_filter_field">create_date</field>
+            <field name="ks_list_view_type">ungrouped</field>
+            <field name="ks_record_data_limit">10</field>
+            <field name="ks_sort_by_order">DESC</field>
+            <field name="ks_chart_item_color">default</field>
+            <field name="ks_chart_groupby_type">relational_type</field>
+            <!-- <field name="ks_chart_relation_groupby" eval="ref('sale.field_sale_order_line__product_id')"/> -->
+            <field name="ks_chart_relation_groupby">product_id</field>
+            <field name="ks_chart_date_groupby">false</field>
+            <field name="ks_record_field">false</field>
+            <field name="ks_chart_sub_groupby_type">other</field>
+            <field name="ks_chart_relation_sub_groupby">false</field>
+            <field name="ks_chart_date_sub_groupby">false</field>
+            <field name="ks_chart_data_count_type">sum</field>
+            <!-- <field name="ks_chart_measure_field" eval="[(6, 0, [ref('sale.field_sale_order_line__product_uom_qty')])]"/> -->
+            <field name="ks_chart_measure_field">product_uom_qty</field>
+            <field name="ks_layout">layout1</field>
+            <field name="ks_icon">false</field>
+            <field name="ks_record_count_type_2">sum</field>
+            <field name="ks_goal_enable">false</field>
+            <field name="ks_standard_goal_value">0</field>
+            <field name="ks_date_filter_selection">l_none</field>
+            <field name="ks_item_end_date">false</field>
+            <field name="ks_item_start_date_2">false</field>
+            <field name="ks_item_end_date_2">false</field>
+            <field name="ks_previous_period">false</field>
+            <field name="ks_date_filter_selection_2">l_none</field>
+            <field name="ks_target_view">Number</field>
+            <field name="ks_show_data_value">true</field>
+            <field name="ks_show_live_pop_up">true</field>
+            <field name="ks_auto_update_type">ks_live_update</field>
+            <field name="ks_update_items_data">false</field>
+            <field name="ks_list_target_deviation_field">false</field>
+            <field name="ks_unit">false</field>
+            <field name="ks_show_records">true</field>
+            <field name="ks_hide_legend">true</field>
+            <field name="ks_export_all_records">true</field>
+            <field name="ks_record_data_limit_visibility">true</field>
+            <field name="ks_data_format">global</field>
+            <field name="ks_pagination_limit">15</field>
+            <field name="ks_chart_cumulative_field">false</field>
+            <field name="ks_chart_cumulative">false</field>
+            <field name="ks_button_color">#000000,0.99</field>
+        </record>
+    </data>
+
+    <!-- WMS Dashboard -->
+    <data noupdate="1">
+        <record id="stock_wms_default_dashboard" model="ks_dashboard_ninja.board">
+            <field name="name">WMS Dashboard 2</field>
+            <field name="ks_dashboard_state">Locked</field>
+            <field name="ks_dashboard_menu_name">Dashboard</field>
+            <field name="ks_dashboard_active">1</field>
+            <field name="ks_dashboard_default_template" ref="thinq_wms_dashboard.stock_wms_dashboard_advance"/>
+            <field name="ks_dashboard_active">1</field>
+            <field name="ks_dashboard_group_access" eval="False"/>
+        </record>
+    </data>
+
+</odoo>

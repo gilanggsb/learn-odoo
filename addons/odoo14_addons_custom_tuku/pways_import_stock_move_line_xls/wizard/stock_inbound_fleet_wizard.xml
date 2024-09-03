@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_inbound_fleet_wizard" model="ir.ui.view">
+        <field name="name">stock.inbound.fleet.wizard</field>
+        <field name="model">stock.inbound.fleet.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Transaction Import">
+                <div class="alert alert-info" role="alert">
+                    <span class="o_form_label">Please Import XLS.</span>
+                </div>
+                <group>
+                    <label for="file_name"/>
+                    <field name="data_file" nolabel="1" filename="file_name" />
+                    <field name="file_name" invisible="1" />
+                </group>
+                <footer>
+                    <button name="action_import_stock_inbound_fleet" string="Import" type="object"
+                            class="oe_highlight"/>
+                    <button string="Close" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_inbound_fleet_wizard" model="ir.actions.act_window">
+        <field name="name">Transaction Import</field>
+        <field name="res_model">stock.inbound.fleet.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

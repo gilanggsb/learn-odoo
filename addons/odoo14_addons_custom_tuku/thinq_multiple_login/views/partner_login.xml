@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <template id="partner_login" name="Partner Login">
+            <title>Partner Login</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
+            <div class="container">
+                <div class="row vh-100 d-flex justify-content-center align-items-center">
+                    <div class="col-sm-6">
+                        <p>Please enter your Access Key</p>
+                        <form action="/web/partner/login" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <input class="form-control" name="access_key" type="password" placeholder="Access Key" />
+                            <div class="alert alert-danger mt-2" role="alert" t-if="error">
+                                <span t-esc="error"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-3">Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+    </data>
+
+
+</odoo>

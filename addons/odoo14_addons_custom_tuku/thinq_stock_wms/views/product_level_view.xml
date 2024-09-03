@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- © 2021 Thinq Technology -->
+
+        <record id="view_product_level_tree" model="ir.ui.view">
+            <field name="name">product.level.tree</field>
+            <field name="model">product.level</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Product Level">
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_product_level_list" model="ir.actions.act_window">
+            <field name="name">Product Level</field>
+            <field name="res_model">product.level</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_action_product_level_list" action="action_product_level_list"
+            sequence="150" parent="stock.menu_stock_config_settings"/>
+
+    </data>
+</odoo>

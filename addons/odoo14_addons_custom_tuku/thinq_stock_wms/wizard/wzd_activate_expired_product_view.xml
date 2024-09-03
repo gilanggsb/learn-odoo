@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_wzd_activate_expired_product_form">
+            <field name="name">wzd.activate.expired.product.form</field>
+            <field name="model">wzd.activate.expired.product</field>
+            <field name="arch" type="xml">
+                <form string="Activate Expired Product">
+                    <group>
+                        <field name="product_id" readonly="1"/>
+                        <field name="expired_date" required="1"/>
+                        <field name="expiration_reminder_days" />
+                    </group>
+                    <footer>
+                        <button name="action_activate_product" type="object" icon="fa-times"
+                                string="Activate Product" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<odoo>
+    <record id="sequence_production_order_batch" model="ir.sequence">
+        <field name="name">Production Orders Batch</field>
+        <field name="code">mrp.production.batch</field>
+        <field name="prefix">PRO/%(year)s/%(month)s/</field>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="True" name="use_date_range"/>
+        <field eval="False" name="company_id"/>
+        <field name="padding">4</field>
+    </record>
+</odoo>

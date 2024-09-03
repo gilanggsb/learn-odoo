@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <template id="report_ba">
+            <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="header">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="vertical-align: top;" class="text-right"> <img class="img img-responsive"
+                                            src="/thinq_stock_wms/static/description/logocas.png"
+                                            style="height: 70px;width:80px;float:right;" /></td>
+                                    <td style="vertical-align: top;">
+                                        <h4 class="text-center"><b>PT. CATUR AMAN SENTOSA</b></h4>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:solid 1px black;">
+                                    <td style="height:10px;"></td>
+                                    <td style="height:10px;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="mt-0" style="font-weight:bold ;">
+                            <center><h2>BERITA ACARA</h2></center>
+                            <div class="mt-3">Yang bertanda tangan dibawah ini</div>
+                            <div>
+                                <table class="ml-5" style="margin-top:10px;">
+                                    <tr>
+                                        <td style="width:100px;">Nama</td>
+                                        <td>:</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:150px;">NIK</td>
+                                        <td>:</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:150px;">Jabatan</td>
+                                        <td style="width:80%;">:</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div>
+                                <div class="mt-3">Menerangkan Bahwa</div>
+                                <div>
+                                    <table class="ml-5" style="margin-top:10px;">
+                                        <tr>
+                                            <td style="width:150px;">Hari / Tanggal</td>
+                                            <td>:</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:150px;">Jam</td>
+                                            <td>:</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:150px;">No Mobil</td>
+                                            <td>:</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:150px;">Issue</td>
+                                            <td>:</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:150px;">PO / DO</td>
+                                            <td>:</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:150px;">Kronologi Kejadian</td>
+                                            <td>:</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:150px;"></td>
+                                            <td style="height: 250px;width:700px;border:1px solid black;"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                    
+                                <div style="margin-top:10px;font-weight:bold;">
+                                    Demikian Berita Acara ini kami buat untuk dipergunakan sebagaimana mestinya
+                                </div>
+                    
+                                <div>
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td style="height:80px ;"></td>
+                                            <td style="height:80px ;"></td>
+                                            <td style="height:80px ;"></td>
+                                            <td style="height:80px ;"></td>
+                                            <td style="height:80px ;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>WH Manager</td>
+                                            <td>WH SPV</td>
+                                            <td>Shift Leader</td>
+                                            <td>Checker</td>
+                                            <td>Driver</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_thinq_stock_forklift" model="ir.ui.view">
+            <field name="name">thinq.stock.forklift</field>
+            <field name="model">thinq.stock.forklift</field>
+            <field name="arch" type="xml">
+                <form string="Forklift">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                        <group>
+                            <field name="code"/>
+                            <field name="partner_id"/>
+                            <field name="warehouse_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_thinq_stock_forklift_tree" model="ir.ui.view">
+            <field name="name">thinq.stock.forklift.tree</field>
+            <field name="model">thinq.stock.forklift</field>
+            <field name="arch" type="xml">
+                <tree string="Forklift">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="partner_id"/>
+                    <field name="warehouse_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_thinq_stock_forklift_view_search" model="ir.ui.view">
+            <field name="name">thinq.stock.forklift.search</field>
+            <field name="model">thinq.stock.forklift</field>
+            <field name="arch" type="xml">
+                <search string="Forklift">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_thinq_stock_forklift_form" model="ir.actions.act_window">
+            <field name="name">Forklift</field>
+            <field name="res_model">thinq.stock.forklift</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" ref="view_thinq_stock_forklift_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Define a new Forklift
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_thinq_stock_forklift_form" id="menu_action_thinq_stock_forklift_form"
+            parent="stock.menu_warehouse_config" sequence="99"/>
+
+    </data>
+</odoo>

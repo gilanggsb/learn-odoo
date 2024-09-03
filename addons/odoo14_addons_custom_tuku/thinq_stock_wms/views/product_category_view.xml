@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- © 2021 Thinq Technology -->
+        
+        <record id="thinq_inherit1_product_category_form_view" model="ir.ui.view">
+            <field name="name">thinq.inherit1.product.category.form</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref = "product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <group name="first" position="inside">
+                    <field name="image_url" widget="url"/>
+                    <button name="upload_image" type="object" string="Upload Image"/>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</odoo>

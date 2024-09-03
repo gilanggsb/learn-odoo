@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="res_users_view_form_inherit" model="ir.ui.view">
+            <field name="name">res.users.view.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='preferences']" position="after">
+                    <group string="Multiple Login">
+                        <field name="is_multiple_login"/>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="partner_list" string="Partner List" attrs="{'invisible': [('is_multiple_login','=',False)]}">
+                        <field name="partner_ids">
+                            <tree>
+                                <field name="name" readonly="1"/>
+                                <field name="session_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

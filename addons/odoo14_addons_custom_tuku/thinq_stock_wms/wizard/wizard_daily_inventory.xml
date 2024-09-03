@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <!-- Add you code here -->
+        <record id="wiz_daily_inventory" model="ir.ui.view">
+            <field name="name">wiz.daily.inventory.view.form</field>
+            <field name="model">wiz.daily.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Daily Inventory">
+                    <group string="Daily Inventory">
+                         <group name="date_range" colspan="2">
+                            <group>
+                                <field name="date_from" options='{"no_open": True, "no_create_edit": True, "no_create": True}'/>
+                            </group>
+                            <group>
+                                <field name="date_to" options='{"no_open": True, "no_create_edit": True, "no_create": True}'/>
+                            </group>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string='Generate' name="generate_report" type="object" invisible="0"/>
+                        or
+                        <button string="Cancel"  special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_wiz_daily_inventory_form" model="ir.actions.act_window">
+            <field name="name">Report Daily Inventory</field>
+            <field name="res_model">wiz.daily.inventory</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wiz_daily_inventory"/>
+            <field name="target">new</field>
+        </record>
+
+           <menuitem parent="stock.menu_warehouse_report"
+              id="thinq_stock_wms.menu_wiz_daily_inventory"
+              name="Report Daily Inventory"
+              action="thinq_stock_wms.action_wiz_daily_inventory_form" sequence="200"/>
+    </data>
+</odoo>
