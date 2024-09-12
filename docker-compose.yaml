@@ -47,6 +47,12 @@ services:
       - HOST=db
       - USER=odoo
       - PASSWORD=odoo
+    
+    # command: odoo -u all -d tuku #update all modules
+    # command: bash -c "until pg_isready -h db -p 5432; do sleep 2; done && odoo -u $(find /mnt/extra-addons -maxdepth 1 -type d -printf '%f\n' | tr '\n' ',' | sed 's/,$//') -d tuku"  # Wait for DB, then update custom modules
+    command: bash -c "until pg_isready -h db -p 5432; do sleep 2; done && odoo -d tukuu"  # Wait for DB, then update custom modules
+    # command: bash -c "until pg_isready -h db -p 5432; do sleep 2; done && odoo -u base,odoo14_addons_custom_tuku,odoo14_addons_tuku -d tukuu"  # Wait for DB, then update custom modules
+    
 
   # Database Container Service Definition
   # --------
@@ -55,6 +61,8 @@ services:
   # container.
   db:
     image: postgres:16
+    ports:
+      - 5431:5432
 
     # Database Environment Variables
     # --------
@@ -68,4 +76,10 @@ services:
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
-      - POSTGRES_DB=postgres  # Leave this set to postgres
+      - POSTGRES_DB=tukuu  # Leave this set to postgres
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
